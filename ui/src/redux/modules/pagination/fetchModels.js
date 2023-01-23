@@ -84,11 +84,9 @@ const shouldFetchSelector = ({ schema, filter, sort, cursor }) => (createSelecto
     const cachedFor = moment().diff(cachedAt);
 
     if (schema === 'visualisation' || schema === 'dashboard') {
-      console.log(schema, cachedFor >= visualisationCacheDuration.asMilliseconds());
       return cachedFor >= visualisationCacheDuration.asMilliseconds();
     }
 
-    console.log(schema, cachedFor >= cacheDuration.asMilliseconds())
     return cachedFor >= cacheDuration.asMilliseconds();
   })
 );
