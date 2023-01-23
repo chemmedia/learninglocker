@@ -30,6 +30,7 @@ const toImmutable = x => (Iterable.isIterable(x) ? x : fromJS(x));
  * SELECTORS
  */
 const cacheDuration = moment.duration({ minute: 3 });
+const visualisationCacheDuration = moment.duration({ hour: 1 });
 
 const defaultFilter = new Map();
 const defaultSort = new Map({ createdAt: -1, _id: 1 });
@@ -81,6 +82,13 @@ const shouldFetchSelector = ({ schema, filter, sort, cursor }) => (createSelecto
     }
 
     const cachedFor = moment().diff(cachedAt);
+
+    if (schema === 'visualisation' || schema === 'dashboard') {
+      console.log(schema, cachedFor >= visualisationCacheDuration.asMilliseconds());
+      return cachedFor >= visualisationCacheDuration.asMilliseconds();
+    }
+
+    console.log(schema, cachedFor >= cacheDuration.asMilliseconds())
     return cachedFor >= cacheDuration.asMilliseconds();
   })
 );
