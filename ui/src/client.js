@@ -9,6 +9,14 @@ import createStore from 'ui/redux/create';
 import LLApiClient from 'ui/utils/LLApiClient';
 import router from 'lib/routes';
 import browserPlugin from 'router5/plugins/browser';
+import * as Sentry from '@sentry/browser';
+import { BrowserTracing } from '@sentry/tracing';
+
+Sentry.init({
+  dsn: 'https://2e57672cbf09437f83225f648c68a2b3@sentry.chemmedia.de/32',
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 0.1,
+});
 
 const llClient = new LLApiClient();
 

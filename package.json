@@ -56,6 +56,8 @@
     "@learninglocker/persona-service": "^1.7.1",
     "@learninglocker/xapi-statements": "^7.5.0",
     "@learninglocker/xapi-validation": "^2.1.5",
+    "@sentry/browser": "^7.33.0",
+    "@sentry/tracing": "^7.33.0",
     "Base64": "^0.3.0",
     "async": "^2.0.0-rc.3",
     "aws-sdk": "^2.77.0",

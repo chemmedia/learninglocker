@@ -13,6 +13,14 @@ import FileStreamRotator from 'file-stream-rotator';
 import config from 'ui/config';
 import renderApp from 'ui/controllers/renderApp';
 import renderDashboard from 'ui/controllers/renderDashboard';
+import * as Sentry from '@sentry/browser';
+import { BrowserTracing } from '@sentry/tracing';
+
+Sentry.init({
+  dsn: 'https://2e57672cbf09437f83225f648c68a2b3@sentry.chemmedia.de/32',
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 0.1,
+});
 
 process.on('SIGINT', () => {
   process.exit(0);
