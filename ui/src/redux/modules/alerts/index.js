@@ -25,19 +25,19 @@ const initialState = new List();
 
 const handler = handleActions({
   [ALERT_START]: (state, action) => {
-    if (!state) {
+    if (!state || !state.push) {
       return initialState.push(action);
     }
     return state.push(action);
   },
   [DELETE_ALERT]: (state, { key }) => {
-    if (!state) {
+    if (!state || !state.delete) {
       return initialState;
     }
     return state.delete(key);
   },
   [DELETE_ALERT_BY_UUID]: (state, { uuid }) => {
-    if (!state) {
+    if (!state || !state.push) {
       return initialState;
     }
     return state.filter && state.filter(item => item.uuid !== uuid) || state;
