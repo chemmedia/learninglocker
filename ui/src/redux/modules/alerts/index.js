@@ -21,11 +21,33 @@ export const SUCCESS = 'success';
 /*
  * Reducers
  */
+const initialState = new List();
+
 const handler = handleActions({
-  [ALERT_START]: (state, action) => state.push(action),
-  [DELETE_ALERT]: (state, { key }) => state.delete(key),
-  [DELETE_ALERT_BY_UUID]: (state, { uuid }) => state.filter && state.filter(item => item.uuid !== uuid) || state,
+  [ALERT_START]: (state, action) => {
+    if (!state || !state.push) {
+      return initialState.push(action);
+    }
+    return state.push(action);
+  },
+  [DELETE_ALERT]: (state, { key }) => {
+    if (!state || !state.delete) {
+      return initialState;
+    }
+    return state.delete(key);
+  },
+  [DELETE_ALERT_BY_UUID]: (state, { uuid }) => {
+    if (!state || !state.push) {
+      return initialState;
+    }
+    return state.filter && state.filter(item => item.uuid !== uuid) || state;
+  },
 });
+
+
+export default function reducer(state = initialState, action = {}) {
+  return handler(state, action);
+}
 
 /*
  * Actions
@@ -84,10 +106,6 @@ const deleteAlertByUuid = ({
  */
 export const alertsSelector = state => state.alerts;
 
-const initialState = new List();
-export default function reducer(state = initialState, action = {}) {
-  return handler(state, action);
-}
 
 export const getAlertsSelector = createSelector(
   [alertsSelector],

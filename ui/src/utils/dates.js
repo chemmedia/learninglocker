@@ -24,14 +24,14 @@ export const periodToDate = (period, timezone, currentMoment, benchmark = 1) => 
 
   switch (period) {
     case TODAY: return cloned.tz(toTimezone(timezone)).startOf('day').utc();
-    case LAST_24_HOURS: return cloned.subtract(24 * benchmark, 'hours');
-    case LAST_7_DAYS: return cloned.subtract(7 * benchmark, 'days');
-    case LAST_30_DAYS: return cloned.subtract(30 * benchmark, 'days');
-    case LAST_2_MONTHS: return cloned.subtract(2 * benchmark, 'months');
-    case LAST_6_MONTHS: return cloned.subtract(6 * benchmark, 'months');
-    case LAST_1_YEAR: return cloned.subtract(1 * benchmark, 'years');
-    case LAST_2_YEARS: return cloned.subtract(2 * benchmark, 'years');
-    default: return cloned.subtract(7 * benchmark, 'days');
+    case LAST_24_HOURS: return cloned.subtract(24 * benchmark, 'hours').startOf('hour');
+    case LAST_7_DAYS: return cloned.subtract(7 * benchmark, 'days').startOf('hour');
+    case LAST_30_DAYS: return cloned.subtract(30 * benchmark, 'days').startOf('hour');
+    case LAST_2_MONTHS: return cloned.subtract(2 * benchmark, 'months').startOf('hour');
+    case LAST_6_MONTHS: return cloned.subtract(6 * benchmark, 'months').startOf('hour');
+    case LAST_1_YEAR: return cloned.subtract(1 * benchmark, 'years').startOf('hour');
+    case LAST_2_YEARS: return cloned.subtract(2 * benchmark, 'years').startOf('hour');
+    default: return cloned.subtract(7 * benchmark, 'days').startOf('hour');
   }
 };
 
